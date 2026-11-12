@@ -1,16 +1,17 @@
 from rubpy import Client
+import asyncio
 import re
 
 bot = Client("my_session")
 
 FORBIDDEN_PATTERN = re.compile(
-    r'(https?://|www\.|rubika\.ir/|t\.me/|telegram\.me/|instagram\.com/|@\w+)',
+    r'(https?://|www\.|rubika\.ir|t\.me)',
     re.IGNORECASE
 )
 
 @bot.on_message_updates()
 async def handler(message):
-    if not message.object_guid.startswith("g0"):
+    if not message.object_guid.startswith('g'):
         return
 
     text = message.text or ""
@@ -18,21 +19,12 @@ async def handler(message):
     if text and FORBIDDEN_PATTERN.search(text):
         try:
             await message.delete()
-            await message.reply("🚫 ارسال لینک و آیدی در این گروه ممنوع است.")
-        except:
+        except Exception:
             pass
-        return
 
-    greetings = {
-        "سلام": "سلام! 🌟 وقتتون بخیر، خوش اومدید.",
-        "صبح بخیر": "صبح بخیر ☀️ روزتون پر از انرژی باشه!",
-        "شب بخیر": "شب بخیر 🌙 خواب‌های قشنگ ببینید.",
-        "جیگر": "جیگر ❤️ چطوری؟",
-        "ایولا": "ایول 🔥 دمت گرم!",
-        "مانده": "مانده‌ای؟ 😅 چیزی شده؟",
-    }
+async def main():
+    await bot.start()
 
-    if text.strip() in greetings:
-        await message.reply(greetings[text.strip()])
-
-bot.run()
+if __name__ == "__main__":
+    asyncio.run(main())
+    
