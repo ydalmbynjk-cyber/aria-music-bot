@@ -1,9 +1,7 @@
 from rubpy import Bot
 import re
 
-# توکن ربات خود را اینجا وارد کنید (یا اگر از کلاینت استفاده می‌کنید)
-# برای ربات‌های رسمی روبیکا از Bot استفاده می‌شود
-bot = Bot('YOUR_BOT_TOKEN')
+bot = Bot('CJBDDJ0JLODRJGHHIBUXTTMOVCFWVDTTAWNLLRSHEIGZYKOOTVNKSBYBVVBVQGTT')
 
 FORBIDDEN_PATTERN = re.compile(
     r'(https?://|www\.|rubika\.ir|t\.me)',
