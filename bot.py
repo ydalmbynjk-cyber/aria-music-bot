@@ -1,7 +1,7 @@
 from rubpy import Client
 import re
 
-bot = Client(token="CJBDDJ0JLODRJGHHIBUXTTMOVCFWVDTTAWNLLRSHEIGZYKOOTVNKSBYBVVBVQGTT")
+bot = Client('CJBDDJ0JLODRJGHHIBUXTTMOVCFWVDTTAWNLLRSHEIGZYKOOTVNKSBYBVVBVQGTT')
 
 FORBIDDEN_PATTERN = re.compile(
     r'(https?://|www\.|rubika\.ir|t\.me)',
