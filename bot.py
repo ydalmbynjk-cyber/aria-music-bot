@@ -1,22 +1,27 @@
-from rubpy import Bot
+from rubpy import Client
 import re
 
-bot = Bot('CJBDDJ0JLODRJGHHIBUXTTMOVCFWVDTTAWNLLRSHEIGZYKOOTVNKSBYBVVBVQGTT')
+async def main():
+    bot = Client(token="CJBDDJ0JLODRJGHHIBUXTTMOVCFWVDTTAWNLLRSHEIGZYKOOTVNKSBYBVVBVQGTT")
+    
+    FORBIDDEN_PATTERN = re.compile(
+        r'(https?://|www\.|rubika\.ir|t\.me)',
+        re.IGNORECASE
+    )
 
-FORBIDDEN_PATTERN = re.compile(
-    r'(https?://|www\.|rubika\.ir|t\.me)',
-    re.IGNORECASE
-)
+    @bot.on_message_updates()
+    async def handler(event):
+        try:
+            text = event.text or ""
+            if text and FORBIDDEN_PATTERN.search(text):
+                await event.delete()
+        except Exception as e:
+            print(f"Error: {e}")
 
-@bot.on_message_updates()
-async def handler(event):
-    try:
-        text = event.text or ""
-        if text and FORBIDDEN_PATTERN.search(text):
-            await event.delete()
-    except Exception as e:
-        print(f"Error: {e}")
+    print("Bot is running...")
+    await bot.start()
 
 if __name__ == "__main__":
-    bot.run()
+    import asyncio
+    asyncio.run(main())
     
